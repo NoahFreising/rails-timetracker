@@ -1,0 +1,45 @@
+<div class="content-wrapper">
+<h1><%= @topic.name %></h1>
+<div class="chart">
+<h2>Activity diagram</h2>
+<%= column_chart @topic.recordings.group_by_day(&:starts_at).map{|k, v| [k, v.inject(0) {|s, a| s + (a.recorded_time/(60*60))}]}, xtitle: "Date", ytitle: "Time spent", download: true, colors: ['#7a3e9d'] %>
+</div>
+<div class="main-section">
+<h2>All recordings</h2>
+<table>
+<thead>
+<tr>
+<th>Titel</th><th>Start</th>
+<th>End</th><th>Length</th>
+</tr>
+</thead>
+<tbody>
+<% @topic.recordings.each do |record| %>
+  <tr>
+    <td><%= link_to record.title, record %></td>
+    <td><%= record.starts_at %></td>
+    <td><%= record.ends_at %></td>
+    <td><em><%= record.recorded_time_to_s %>h</em></td>
+  </tr>
+<% end %>
+</tbody>
+<tfoot>
+<tr><td colspan="3">Total time:</td><td><strong><%= @topic.total_time_to_s %>h</strong></td></tr>
+</tfoot>
+</table>
+</div>
+<div class="nav-bar">
+<p>
+  <%= link_to 'Edit', edit_topic_path(@topic) %>
+  <%= link_to 'Delete', topic_path(@topic),
+              method: :delete,
+              data: {confirm: "Are you sure?"} %>
+</p>
+<p>
+  <%= link_to 'New Recording', new_recording_path %>
+</p>
+<p>
+  <%= link_to 'All Topics', topics_path %>
+</p>
+</div>
+</div>

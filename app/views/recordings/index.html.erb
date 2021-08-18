@@ -1,0 +1,20 @@
+<h1>All Recordings</h1>
+<table>
+<thead>
+<tr>
+    <th>Topic</th>
+    <th>Begin</th>
+    <th>End</th>
+    <th>Time</th>
+</thead>
+<tbody>
+<%= @recordings.each do |recording| %>
+    <tr>
+        <td><%= link_to recording.topic.name, recording %></td>
+        <td><%= recording.starts_at %></td>
+        <td><%= recording.ends_at %></td>
+        <td><%= recording.recorded_time_to_s %>
+    </tr>
+<% end %>
+</tbody>
+</table>

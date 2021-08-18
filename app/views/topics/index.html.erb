@@ -1,0 +1,27 @@
+<div class="content-wrapper">
+<h1>Topics</h1>
+<div class="main-section">
+<table>
+<thead>
+<tr>
+<th>topic</th>
+<th>no. of recordings</th>
+<th>complete time</th>
+</tr>
+</thead>
+<tbody>
+<% @topics.each do |topic| %>
+    <tr>
+        <td><%= link_to topic.name, topic %></td>
+        <td><%= topic.recordings.length %></td>
+        <td><%= topic.total_time_to_s %></td>
+    </tr>
+<% end %>
+</tbody>
+</table>
+</div>
+<div class="nav-bar">
+<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'New Recording', new_recording_path %>
+</div>
+</div>

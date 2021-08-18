@@ -1,0 +1,24 @@
+<div class="content-wrapper">
+<h1><%= link_to @recording.topic.name, @recording.topic %></h1>
+<h2><%= @recording.title %></h2>
+<p><%= @recording.comment %></p>
+<table>
+    <thead>
+        <tr><th>start</th><th>end</th>
+    </thead>
+    <tbody>
+        <tr><td><%= @recording.starts_at %></td><td><%= @recording.ends_at %></td></tr>
+    </tbody>
+</table>
+<div class="nav-bar">
+<p>
+<%= link_to "Edit", edit_recording_path(@recording) %>
+<%= link_to "Delete", @recording,
+            method: :delete,
+            data: { confirm: "Are you sure?"} %>
+</p>
+
+<%= link_to "All topics", topics_path %>
+<%= link_to "All recordings", recordings_path %>
+</div>
+</div>
